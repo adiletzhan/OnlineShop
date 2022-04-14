@@ -4,7 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/bg_borders.xml" value="0.18385416666666668" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.13179347826086957" />
+        <entry key="app/src/main/res/drawable/ic_orders.xml" value="0.24895833333333334" />
+        <entry key="app/src/main/res/drawable/ic_raqmet.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_regular_home.xml" value="0.24895833333333334" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2572420866593072" />
         <entry key="app/src/main/res/layout/item_product.xml" value="0.43515903005080425" />
       </map>
     </option>
