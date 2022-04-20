@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
-    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +59,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView(products: Products) = binding.rvProducts.apply {
-        adapter = ProductAdapter(products)
+        adapter = ProductAdapter(products, context)
         layoutManager = LinearLayoutManager(this@MainActivity)
     }
 }
