@@ -28,9 +28,9 @@ class MainActivity : AppCompatActivity() {
 
         getRequest()
 
-        viewModel.progressSuccessLiveData.observe(this){isSuccess ->
-            binding.progressBar.isVisible = !isSuccess
-            binding.rvProducts.isVisible = isSuccess
+        viewModel.loadingLiveData.observe(this){ isLoading ->
+            binding.progressBar.isVisible = isLoading
+            binding.rvProducts.isVisible = !isLoading
 
         }
 
@@ -62,4 +62,5 @@ class MainActivity : AppCompatActivity() {
         adapter = ProductAdapter(products, context)
         layoutManager = LinearLayoutManager(this@MainActivity)
     }
+
 }

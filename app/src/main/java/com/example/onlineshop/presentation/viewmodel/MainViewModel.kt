@@ -15,31 +15,34 @@ private const val TAG = "MainActivity"
 class MainViewModel(
     /*private val mainRepository: MainRepository*/): ViewModel() {
 
+    private val errorMessage = MutableLiveData<String>()
     private val responseMutableLiveData = MutableLiveData<Response<Products>>()
     val responseLiveData = responseMutableLiveData
 
-    private var progressSuccessMutableLiveData = MutableLiveData<Boolean>()
-    var progressSuccessLiveData = progressSuccessMutableLiveData
+    private var loadingMutableLiveData = MutableLiveData<Boolean>()
+    var loadingLiveData = loadingMutableLiveData
+
+    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        onError("Exception Handled: ${throwable.localizedMessage}")
+    }
 
     fun loadData() {
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
 
-            val response = try{
-                //mainRepository.getProducts()
-                api.getProducts()
-        } catch (e: IOException){
-            Log.e(TAG, "IOException, you might not have internet connection")
-                return@launch
-        } catch (e: HttpException) {
-            Log.e(TAG, "HttpException, unexpected response")
-                return@launch
-        }
+            val response = api.getProducts()
+            //mainRepository.getProducts()
 
             withContext(Dispatchers.Main){
                 if (response.isSuccessful){
                     responseLiveData.postValue(response)
+                    loadingMutableLiveData.value = false
                 }
             }
         }
+    }
+
+    private fun onError(message: String){
+        errorMessage.value = message
+        loadingMutableLiveData.value = false
     }
 }
